@@ -1,0 +1,120 @@
+--ACTIVAR SALIDA POR PANTALLA
+SET SERVEROUTPUT ON;
+
+BEGIN
+dbms_output.put_line('Hola mundo');
+
+END;
+
+--USO DE VARIABLES
+DECLARE
+    v_nombre VARCHAR2(50); --v_ por variable
+
+BEGIN
+    v_nombre := 'PEDRITO';
+    dbms_output.put_line(v_nombre);
+
+
+END;
+
+--2DA
+DECLARE
+    v_nombre VARCHAR2(50); --v_ por variable
+    v_apellido VARCHAR2(50) := 'FUENTES'; --asignar valor 
+BEGIN
+    v_nombre := 'PEDRITO';
+    dbms_output.put_line(v_nombre);
+    dbms_output.put_line(v_apellido);
+END;
+
+--CONCATENACIONES
+DECLARE
+    v_nombre VARCHAR2(50); --v_ por variable
+    v_apellido VARCHAR2(50) := 'FUENTES';
+BEGIN
+    v_nombre := 'PEDRITO';
+    dbms_output.put_line('Nombre:' || v_nombre);
+    dbms_output.put_line('Apellido:' || v_apellido);
+END;
+
+--FUNCIONES
+DECLARE
+    v_nombre VARCHAR2(50); --v_ por variable
+    v_apellido VARCHAR2(50) := 'FUENTES';
+BEGIN
+    v_nombre := UPPER( 'pedrito');
+    dbms_output.put_line('Nombre:' || v_nombre);
+    dbms_output.put_line('Apellido:' || LOWER( v_apellido));
+END;
+--ejercicio 1
+DECLARE
+ v_fecha_nac DATE := '21-07-2000';
+ v_fecha_actual DATE := SYSDATE;
+ v_anio_nac number(4) := 0; --2000
+ v_anio_actual NUMBER(4) := 0; --2024
+ v_edad NUMBER(3) := 0; --24
+ 
+ BEGIN
+ v_anio_nac := EXTRACT(YEAR FROM v_fecha_nac);
+ v_anio_actual := EXTRACT(YEAR FROM v_fecha_actual);
+ v_edad := v_anio_nac - v_anio_actual;
+ 
+ dbms_output.put_line('tiene' || v_edad || 'años');
+ 
+ END;
+ 
+ --ejercicio 2
+ 
+ DECLARE 
+ v_fecha_nac DATE := '24-08-2004';
+ v_meses_vividos NUMBER(10);
+ BEGIN
+    v_meses_vividos := MONTHS_BETWEEN(SYSDATE, v_fecha_nac);
+    
+    dbms_output.put_line(v_meses_vividos);
+ 
+ END;
+ 
+ --ejercicio 3
+  DECLARE 
+ v_fecha_nac DATE := '2-09-1994';
+ v_dias_vividos NUMBER(10);
+ BEGIN
+    v_dias_vividos := SYSDATE- v_fecha_nac;
+    
+    dbms_output.put_line(v_dias_vividos);
+ 
+ END;
+
+ --constantes again
+ 
+ DECLARE 
+ c_iva CONSTANT NUMBER(2):= 19;
+ BEGIN
+ c_iva := 20;
+ END;
+ 
+ --ATRIBUTO %TYPE
+ DECLARE
+ v_nombre VARCHAR(20);
+ v_ape_pat v_nombre%TYPE; --ASIGNA UN TIPO DE DATO A OTRA VARIABLE
+ v_ape_mat v_nombre%TYPE;
+
+ v_domicilio clientes.domiciio%TYPE; --SE ASIGNA UN TIPO DE DATO DE UNA COLUMNA
+ BEGIN
+ 
+ END;
+
+ DECLARE
+ v_nombre VARCHAR(20);
+ v_ape_pat v_nombre%TYPE;
+ v_ape_mat v_nombre%TYPE;
+ --v_domicilio --clientes.domiciio%TYPE;
+ BEGIN
+ v_nombre:= 'Ivan';
+ v_ape_pat:= 'Zamorano';
+ v_ape_mat:= 'Zmora';
+ dbms_output.put_line(v_nombre||' '||v_ape_pat||' '||v_ape_mat);
+ 
+ 
+ END;
