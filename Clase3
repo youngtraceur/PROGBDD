@@ -1,0 +1,22 @@
+--ejercicio
+VARIABLE b_employee_id NUMBER;
+SET SERVEROUTPUT ON
+DECLARE
+v_first_name VARCHAR2(20);
+v_last_name VARCHAR2(25);
+v_salary NUMBER(8,2);
+v_hire_date DATE;
+v_anios_trabajados NUMBER;
+
+BEGIN 
+
+SELECT FIRST_NAME,LAST_NAME,SALARY,HIRE_DATE
+INTO v_first_name,v_last_name,v_salary,v_hire_date --into para insertar datos
+FROM EMPLOYEES WHERE employee_id =:b_employee_id;
+v_anios_trabajados :=ROUND(MONTHS_BETWEEN(SYSDATE, v_hire_date)/12);
+dbms_output.put_line(v_first_name);
+dbms_output.put_line(v_last_name);
+dbms_output.put_line(v_salary);
+dbms_output.put_line(v_hire_date);
+dbms_output.put_line(v_anios_trabajados);
+END;
