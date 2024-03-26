@@ -1,0 +1,30 @@
+VARIABLE b_employee_id NUMBER;
+SET SERVEROUTPUT ON
+DECLARE
+v_first_name VARCHAR2(20);
+v_last_name VARCHAR2(25);
+v_hire_date DATE;
+v_salary NUMBER(8);
+v_anios_trabajados NUMBER;
+v_bono NUMBER;
+v_commission_pct NUMERIC(2.2);
+BEGIN 
+
+SELECT FIRST_NAME,LAST_NAME,SALARY,HIRE_DATE, COMMISSION_PCT
+INTO v_first_name,v_last_name,v_salary,v_hire_date,v_commission_pct --into para insertar datos
+FROM EMPLOYEES WHERE employee_id =:b_employee_id;
+v_anios_trabajados :=ROUND(MONTHS_BETWEEN(SYSDATE, v_hire_date)/12);
+dbms_output.put_line(v_first_name);
+dbms_output.put_line(v_last_name);
+dbms_output.put_line(v_hire_date);
+dbms_output.put_line(v_anios_trabajados);
+IF v_anios_trabajados > 5 THEN v_salary := v_salary*1.05;
+dbms_output.put_line('gano bonito');
+ELSE
+dbms_output.put_line('no hay bonito jaja');
+END IF;
+IF v_commission_pct IS NULL THEN
+dbms_output.put_line('no hay comision tontito');
+ELSE dbms_output.put_line('shi tiene comision');
+END IF;
+END;
